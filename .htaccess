@@ -1,0 +1,17 @@
+# ROM'S NATURAL - Configuration Apache
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /roms/
+
+    # Empêcher l'accès direct aux fichiers de données SQLite
+    RewriteRule ^data/.*$ - [F,L]
+</IfModule>
+
+# Protection des fichiers sensibles
+<FilesMatch "(database\.sqlite|\.env|\.git)">
+    Require all denied
+</FilesMatch>
+
